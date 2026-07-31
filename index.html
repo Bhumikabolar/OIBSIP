@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bhumika | OIBSIP Web Development Projects</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070b18;
+            color: #f5f7ff;
+            min-height: 100vh;
+        }
+
+        /* Background glow */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #6c4cff;
+            filter: blur(180px);
+            opacity: 0.15;
+            top: -200px;
+            left: -150px;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: #00b7ff;
+            filter: blur(180px);
+            opacity: 0.08;
+            right: -150px;
+            bottom: -100px;
+            pointer-events: none;
+        }
+
+        /* Navbar */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(7, 11, 24, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #8b6cff;
+        }
+
+        nav a {
+            color: #aeb7d0;
+            text-decoration: none;
+            margin-left: 28px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 9px 18px;
+            border: 1px solid #6f58e8;
+            border-radius: 50px;
+            color: #b8aaff;
+            font-size: 13px;
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 78px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .gradient {
+            background: linear-gradient(90deg, #8b6cff, #b78cff, #5ecbff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #98a4c1;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 6px;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: linear-gradient(135deg, #7655ff, #966cff);
+            color: white;
+            box-shadow: 0 10px 30px rgba(118,85,255,0.3);
+        }
+
+        .secondary {
+            border: 1px solid #313b58;
+            color: #dce2f2;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 850px;
+            margin: 0 auto 100px;
+            border: 1px solid #202941;
+            border-radius: 18px;
+            background: rgba(15, 21, 39, 0.7);
+        }
+
+        .stat {
+            padding: 28px;
+            text-align: center;
+            border-right: 1px solid #202941;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat h2 {
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .stat p {
+            color: #7885a5;
+            font-size: 13px;
+        }
+
+        /* Projects */
+        .projects {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 20px 100px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-heading small {
+            color: #896cff;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .section-heading h2 {
+            font-size: 42px;
+            margin: 15px 0;
+        }
+
+        .section-heading p {
+            color: #8e9ab7;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            position: relative;
+            padding: 30px;
+            min-height: 330px;
+            border: 1px solid #202941;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #10172a, #0c1222);
+            transition: 0.4s;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: #7655ff;
+            filter: blur(70px);
+            opacity: 0;
+            right: -30px;
+            top: -30px;
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #7655ff;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+        }
+
+        .card:hover::before {
+            opacity: 0.25;
+        }
+
+        .number {
+            color: #8c70ff;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: #1c2144;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #8f9bb7;
+            line-height: 1.7;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .card-link {
+            color: #9b82ff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .card-link:hover {
+            color: white;
+        }
+
+        /* About */
+        .about {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px 20px 100px;
+        }
+
+        .about-box {
+            padding: 45px;
+            border-radius: 20px;
+            background: #0e1527;
+            border: 1px solid #202941;
+        }
+
+        .about-box p {
+            color: #95a1bd;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #1c2438;
+            padding: 35px 20px;
+            text-align: center;
+            color: #68748f;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: #a38dff;
+        }
+
+        /* Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav div:last-child {
+                display: none;
+            }
+
+            .hero {
+                min-height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid #202941;
+            }
+
+            .stat:last-child {
+                border-bottom: none;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading h2 {
+                font-size: 32px;
+            }
+
+            .about-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Bhumika<span>.</span></div>
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+
+            <div class="badge">
+                ✦ OIBSIP Web Development Internship
+            </div>
+
+            <h1>
+                Building the Web,<br>
+                <span class="gradient">One Project at a Time.</span>
+            </h1>
+
+            <p>
+                Welcome to my Oasis Infobyte Web Development internship
+                project showcase. Explore my responsive, interactive and
+                user-focused web development tasks.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn primary">
+                    Explore Projects →
+                </a>
+
+                <a href="https://github.com/Bhumikabolar/OIBSIP"
+                   target="_blank"
+                   class="btn secondary">
+                    GitHub Repository ↗
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Stats -->
+    <section class="stats">
+
+        <div class="stat">
+            <h2>03</h2>
+            <p>Web Development Tasks</p>
+        </div>
+
+        <div class="stat">
+            <h2>100%</h2>
+            <p>Responsive Design</p>
+        </div>
+
+        <div class="stat">
+            <h2>∞</h2>
+            <p>Learning & Building</p>
+        </div>
+
+    </section>
+
+
+    <!-- Projects -->
+    <section class="projects" id="projects">
+
+        <div class="section-heading">
+            <small>MY INTERNSHIP WORK</small>
+
+            <h2>
+                Featured <span class="gradient">Projects</span>
+            </h2>
+
+            <p>
+                Three projects developed as part of my OIBSIP Web Development
+                internship.
+            </p>
+        </div>
+
+
+        <div class="project-grid">
+
+            <!-- Task 1 -->
+            <div class="card">
+
+                <div class="number">01 / LANDING PAGE</div>
+
+                <div class="icon">✦</div>
+
+                <h3>NexaAI</h3>
+
+                <p>
+                    A modern AI-focused landing page featuring responsive
+                    design, animated elements, feature sections and
+                    interactive call-to-action components.
+                </p>
+
+                <a
+                    href="Web%20Development-Level%201-Landing%20Page/Task-1-Landing-Page/"
+                    class="card-link">
+                    View Project →
+                </a>
+
+            </div>
+
+
+            <!-- Task 2 -->
+            <div class="card">
+
+                <div class="number">02 / PORTFOLIO</div>
+
+                <div class="icon">◈</div>
+
+                <h3>Personal Portfolio</h3>
+
+                <p>
+                    A professional personal portfolio showcasing my skills,
+                    projects, education, certifications and experience with
+                    an interactive responsive interface.
+                </p>
+
+                <a
+                    href="Web%20Development-Level%201-Landing%20Page/Task-2-Personal-Portfolio/"
+                    class="card-link">
+                    View Portfolio →
+                </a>
+
+            </div>
+
+
+            <!-- Task 3 -->
+            <div class="card">
+
+                <div class="number">03 / JAVASCRIPT</div>
+
+                <div class="icon">🌡️</div>
+
+                <h3>Temperature Converter</h3>
+
+                <p>
+                    An interactive temperature conversion application built
+                    with HTML, CSS and JavaScript supporting multiple
+                    temperature units and real-time conversion.
+                </p>
+
+                <a
+                    href="Web%20Development-Level%201-Landing%20Page/Task-3-Temperature-Converter/"
+                    class="card-link">
+                    Try Converter →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="about" id="about">
+
+        <div class="about-box">
+
+            <div class="section-heading">
+                <small>ABOUT</small>
+
+                <h2>
+                    Hi, I'm <span class="gradient">Bhumika.</span>
+                </h2>
+            </div>
+
+            <p>
+                I'm a Computer Science undergraduate and aspiring Full Stack
+                Developer interested in building clean, responsive and
+                meaningful digital experiences. This page brings together
+                my OIBSIP Web Development internship projects in one place.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        Designed & developed by <strong>Bhumika Bolar</strong>
+        <br><br>
+        OIBSIP Web Development Internship • 2026
+    </footer>
+
+</body>
+</html>

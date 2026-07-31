@@ -1,5 +1,5 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy NexaAI Landing Page
+# Deploy all OIBSIP internship tasks to GitHub Pages
+name: Deploy OIBSIP Projects
 
 on:
   push:
@@ -25,17 +25,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload Task 1 Landing Page
+      - name: Upload OIBSIP Projects
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './Web Development-Level 1-Landing Page/Task-1-Landing-Page'
+          path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
